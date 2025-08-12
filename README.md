@@ -3,46 +3,79 @@
 
 An intelligent self-learning platform built using the MERN stack, designed to streamline personal study workflows with the power of AI. Users can manage subjects, take rich text notes, track study progress, and soon integrate Pomodoro timers, GPT-powered quiz generation, voice-to-text, and more.
 
+
+
 ---
 
 ## 🚀 Features Completed (Up to Day 5)
 
 ### ✅ Authentication
-- Register and login pages (React + Zustand)
-- Auth token handling via JWT
-- Protected routes using `ProtectedRoute` and Zustand-based auth store
-- Auth state persists using `zustand/middleware` + localStorage
+
+* Register and login pages (React + Zustand)
+* Auth token handling via JWT
+* Protected routes using `ProtectedRoute` and Zustand-based auth store
+* Auth state persists using `zustand/middleware` + localStorage
 
 ### ✅ Dashboard
-- After login, users are redirected to a dashboard
-- Clean layout with a responsive sidebar (Dashboard, Notes, Pomodoro, Quiz, etc.)
-- Dashboard components: 
-  - 📌 `DashboardHeader`
-  - 📌 `DashboardCards`
-  - 📌 `SubjectForm` – add new subjects
-  - 📌 `SubjectGrid` – shows all created subjects
-  - 📌 `RecentlyEdited` – static placeholder for now
+
+* After login, users are redirected to a dashboard
+* Clean layout with a responsive sidebar (Dashboard, Notes, Pomodoro, Quiz, etc.)
+* Dashboard components:
+
+  * 📌 `DashboardHeader`
+  * 📌 `DashboardCards`
+  * 📌 `SubjectForm` – add new subjects
+  * 📌 `SubjectGrid` – shows all created subjects
+  * 📌 `RecentlyEdited` – static placeholder for now
 
 ### ✅ Subjects
-- User can create subjects via `SubjectForm`
-- Subjects are shown in a grid layout
-- Each subject is clickable → navigates to `/subject/:id`
-- Dynamic routing and note filtering per subject works
-- State managed via Zustand
+
+* User can create subjects via `SubjectForm`
+* Subjects are shown in a grid layout
+* Each subject is clickable → navigates to `/subject/:id`
+* Dynamic routing and note filtering per subject works
+* State managed via Zustand
 
 ### ✅ Notes System
-- Rich text notes via `NoteForm`
-- Notes shown in `NoteGrid`
-- Notes stored per subject (`/api/notes/:subjectId`)
-- API: Create, Read notes linked to subjects
+
+* Rich text notes via `NoteForm`
+* Notes shown in `NoteGrid`
+* Notes stored per subject (`/api/notes/:subjectId`)
+* API: Create, Read, Delete notes linked to subjects
+* **Day 5 Update**:
+
+  * Linked `NoteForm` & `NoteGrid` to pass `subjectId` props
+  * `noteStore` updated with `fetchNotesBySubject`, `createNoteForSubject`, and `deleteNote` methods
+  * `SubjectPage` now fetches & displays only that subject’s notes
+
+### ✅ Pomodoro + Task Scheduling (Day 5)
+
+* New `/pomodoro` route added and linked from sidebar
+* Components:
+
+  * ⏳ `PomodoroTimer` – work/break timer with Zustand-managed state
+  * 📝 `TaskInput` – add tasks
+  * 📋 `TaskList` – view and manage tasks
+* Timer State in Zustand:
+
+  * Session mode (`work` or `break`)
+  * Countdown time left
+  * Start/stop functionality
+* Task State in Zustand:
+
+  * Add and delete tasks
+  * Tasks stored in memory (will connect to backend later)
+
+---
 
 ### ⚙️ Folder Structure (Frontend)
-```
 
+```
 frontend/
 ├── components/
 │   ├── dashboard/
 │   ├── notes/
+│   ├── pomodoro/
 │   ├── ui/
 │   ├── Sidebar.jsx
 │   ├── ProtectedRoute.jsx
@@ -51,15 +84,20 @@ frontend/
 │   ├── Login.jsx
 │   ├── Register.jsx
 │   ├── Dashboard.jsx
-│   └── SubjectPage.jsx
+│   ├── SubjectPage.jsx
+│   └── PomodoroPage.jsx
 ├── store/
 │   ├── authStore.js
 │   ├── subjectStore.js
-│   └── noteStore.js
+│   ├── noteStore.js
+│   └── pomodoroStore.js
 ├── App.jsx
 └── main.jsx
+```
 
-````
+---
+
+
 
 ---
 
@@ -90,11 +128,10 @@ frontend/
 
 ---
 
-## 🧠 Coming Up (Day 5 to Day 6+)
+## 🧠 Coming Up ( Day 6+)
 
 | Day  | Feature                                | Description                             |
 |------|----------------------------------------|-----------------------------------------|
-| 5    | Pomodoro + Task Scheduling             | Timer, task list with Zustand state     |
 | 6    | Dashboard Charts + Overview            | Recharts for study progress             |
 | 7    | GPT Quiz Generation                    | Generate quiz from notes via GPT        |
 | 8    | Quiz Answering + Evaluation            | Evaluate quiz answers using AI          |
