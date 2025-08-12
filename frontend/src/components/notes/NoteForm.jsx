@@ -14,13 +14,20 @@ const NoteForm = ({ subjectId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createNote(note, subjectId);
+    if (!note.title.trim() && !note.content.trim()) return;
+
+    // Pass subjectId to backend/store so the note is linked correctly
+    await createNote({ ...note, subjectId });
     await fetchNotes(subjectId);
+
     setNote({ title: "", content: "" });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 bg-white rounded-xl shadow">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 p-4 bg-white rounded-xl shadow"
+    >
       <Input
         name="title"
         placeholder="Title"
@@ -34,7 +41,9 @@ const NoteForm = ({ subjectId }) => {
         value={note.content}
         onChange={handleChange}
       />
-      <Button type="submit">Save Note</Button>
+      <Button type="submit" className="w-full">
+        Save Note
+      </Button>
     </form>
   );
 };

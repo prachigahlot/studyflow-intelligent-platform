@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import SubjectPage from "./pages/SubjectPage";
-
+import PomodoroPage from "./pages/PomodoroPage";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
              <Route path="/subject/:id" element={<SubjectPage />} />
+             <Route path="/pomodoro" element={<PomodoroPage />} />
             {/* More protected routes go here later */}
           </Route>
         </Route>
